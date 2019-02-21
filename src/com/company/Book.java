@@ -34,8 +34,7 @@ public class Book implements Serializable {
         writerSurname = null;
         writerNames = null;
         typeOfBook = null;
-        id = counter;
-        counter++;
+        id = counter++;
     }
 
     @Override
@@ -59,7 +58,23 @@ public class Book implements Serializable {
         return id;
     }
 
+    public boolean isIfAvailable() {
+        return ifAvailable;
+    }
+
     public void setIfAvailable(boolean ifAvailable) {
         this.ifAvailable = ifAvailable;
+    }
+
+    public void setNumberOfLending(int numberOfLending) {
+        this.numberOfLending = numberOfLending;
+    }
+
+    public int getNumberOfLending() {
+        return numberOfLending;
+    }
+
+    public void setWriterSurname(String writerSurname) {
+        this.writerSurname = writerSurname;
     }
 }

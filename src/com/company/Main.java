@@ -1,19 +1,17 @@
 package com.company;
 
+import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
-
 
         static String fileName = null;
         static Library lib = new Library();
         static Scanner scan = new Scanner(System.in);
         static Boolean running = true;
-        Book b1 = new Book("Henryk, Adam", "Sienkiewicz", "W pustynii i puszczy", 1900, "drama;adventure;family");
-        Book b2 = new Book("Adam", "Mickiewicz", "Pan Tadeusz", 1800, "drama");
-        Book b3 = new Book("Wladyslaw", "Reymont", "Chlopi", 1850, "drama;family");
 
-        public static void main(String[] args) {
+        public static void main(String[] args) throws IOException{
 
             while (running) {
                 System.out.println("**************************************************************************");
@@ -47,6 +45,10 @@ public class Main {
                         addBook();
                         break;
 
+                    case 4:
+                        editBook();
+                        break;
+
                     case 5:
                         lentBook();
                         break;
@@ -70,31 +72,40 @@ public class Main {
             int yearOfPublication;
 
             System.out.println("Give me a title");
-            title = scan.next();
+            title = scan.nextLine();
+            scan.nextLine();
 
             System.out.println("Give me a writer names");
-            writerNames = scan.next();
+            writerNames = scan.nextLine();
 
             System.out.println("Give me a writer surname");
-            writerSurname = scan.next();
+            writerSurname = scan.nextLine();
 
             System.out.println("Give me types of book");
-            typeOfBook = scan.next();
+            typeOfBook = scan.nextLine();
 
-            System.out.println("Give me year of publication");
-            yearOfPublication = scan.nextInt();
-
+            while(true){
+                Scanner scan = new Scanner(System.in);
+                System.out.println("Give me year of publication");
+                try {
+                yearOfPublication = scan.nextInt();
+                break;}
+                catch (InputMismatchException e) {
+                System.out.println("Please write number");
+                scan.next();
+                continue;}
+            }
             Book b = new Book(writerNames, writerSurname, title, yearOfPublication, typeOfBook);
             lib.addBook(b);
-
-
         }
 
         private static void lentBook(){
             int id;
             System.out.println("Give an ID");
             id = scan.nextInt();
-
+            if(lib.books[id-1].isIfAvailable()==false){
+                System.out.println("Book has been loaned");
+            }else
             lib.books[id-1].setIfAvailable(false);
         }
 
@@ -102,10 +113,52 @@ public class Main {
             int id;
             System.out.println("Give an ID");
             id = scan.nextInt();
-
-            lib.books[id - 1].setIfAvailable(true);
+            if(lib.books[id-1].isIfAvailable()==true){
+                System.out.println("Book has been returned or Haven't been loaned");
+            }else
+            {lib.books[id - 1].setIfAvailable(true);
+            int temp;
+            temp=lib.books[id - 1].getNumberOfLending();
+            temp++;
+            lib.books[id - 1].setNumberOfLending(temp);
+            System.out.println("Book has been loaned " + temp);}
         }
-    }
+
+        private static void editBook(){
+            int chose;
+            int id;
+            while(running) {
+                System.out.println("1. Change surname");
+                System.out.println("2. Change name");
+                System.out.println("3. Change title");
+                System.out.println("4. Change year of publicity");
+                System.out.println("5. Change types of book");
+                System.out.println("6. Return");
+
+            chose = scan.nextInt();
+                switch (chose) {
+                    case 1:
+                        System.out.println("Give an ID");
+                        id = scan.nextInt();
+                        System.out.println("1. Change surname");
+                        lib.books[id - 1].setWriterSurname(scan.next());
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+                    case 6:
+                        break;
+                }
+                }
+            }
+
+        }
+
 
 
 
