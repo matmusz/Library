@@ -34,11 +34,11 @@ public class Main {
                         running=false;
                         break;
                     case 1:
-                        System.out.println(lib.toString());
+                        System.out.println(lib.shortVersion());
                         break;
 
                     case 2:
-                        System.out.println(lib.books[1]);
+                        System.out.println(lib.toString());
                         break;
 
                     case 3:
@@ -127,7 +127,8 @@ public class Main {
         private static void editBook(){
             int chose;
             int id;
-            while(running) {
+            boolean running1=true;
+            while(running1) {
                 System.out.println("1. Change surname");
                 System.out.println("2. Change name");
                 System.out.println("3. Change title");
@@ -140,7 +141,8 @@ public class Main {
                     case 1:
                         System.out.println("Give an ID");
                         id = scan.nextInt();
-                        System.out.println("1. Change surname");
+                        System.out.println("Current surname " + lib.books[id-1].getWriterSurname());
+                        System.out.println("Write corrected surname");
                         lib.books[id - 1].setWriterSurname(scan.next());
                         break;
                     case 2:
@@ -152,10 +154,12 @@ public class Main {
                     case 5:
                         break;
                     case 6:
+                        running1=false;
                         break;
                 }
                 }
             }
+
 
         }
 
