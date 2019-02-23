@@ -1,7 +1,6 @@
 package com.company;
 
-import java.io.FileReader;
-import java.io.Serializable;
+import java.io.*;
 import java.util.Arrays;
 
 public class Library implements Serializable {
@@ -23,26 +22,31 @@ public class Library implements Serializable {
         }
     }
 
-    public String shortVersion(){
+    public String shortVersion() {
 
         String total = "\n";
         for (int i = 0; i < howManyBooks; i++) {
             Book b = books[i];
-            total = total + b.initialNames();
+            total = total + b.getId() + " " + b.initialNames() + " " + b.getWriterSurname() + " " + ",,"
+                    + b.getTitle() + "''" + " " + b.returnYesorNo();
         }
         return total + "\n";
 
     }
 
-    public void saveToFile(){
-        FileWriter file = null
-
+     /*   public void saveToFile()throws IOException{
+        FileWriter file = null;
+        try {
+            file = new FileWriter("baza.txt");
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        BufferedWriter bw = new BufferedWriter(file);
         try{
-            file=new FileReader();
-
+            bw.
         }
 
-    }
+    }*/
 
     @Override
     public String toString() {
@@ -52,7 +56,7 @@ public class Library implements Serializable {
             total = total + b.toString();
         }
 
-        return total + "\n" + "Books in library "+howManyBooks;
+        return total + "\n" + "Books in library " + howManyBooks;
     }
 
 

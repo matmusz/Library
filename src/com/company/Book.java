@@ -1,5 +1,8 @@
 package com.company;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Serializable;
 
 public class Book implements Serializable {
@@ -28,46 +31,30 @@ public class Book implements Serializable {
 
     }
 
-    public Book() {
-        yearOfPublication = 0;
-        title = null;
-        writerSurname = null;
-        writerNames = null;
-        typeOfBook = null;
-        id = counter++;
-    }
+    public String initialNames() {     //takes initials from names
 
-    public void ifAvailable(){
-        if(ifAvailable==true)
-            System.out.println("Yes");
-        else System.out.println("No");
-
-    }
-    public String initialNames() {
         String temp = this.writerNames;
-        String[]tm = temp.split(" ");
-        String tur = (String) tm[0].charAt(0);
-        char tur1 = tm[1].charAt(0);
-          temp = tur+tur1;
-          return ;
+        String t = "";
+        char ch;
+        String[] tm = temp.split(" ");
 
+        for (int i = 0; i < tm.length; i++) {
+            ch = tm[i].charAt(0);
+            t = t + ch + ".";
         }
+        return t;
+    }
 
-
-
-
-
-
-
+    public String returnYesorNo(){
+        String s;
+        if (ifAvailable == true)
+            return s = "Yes";
+        else
+            return s = "No";
+    }
 
     @Override
     public String toString() {
-        String s;
-        if (ifAvailable == true)
-            s = "Yes";
-        else
-            s = "No";
-
         return "Book{" +
                 "id=" + id +
                 ", numberOfLending=" + numberOfLending +
@@ -76,12 +63,10 @@ public class Book implements Serializable {
                 ", writerSurname='" + writerSurname + '\'' +
                 ", writerNames='" + writerNames + '\'' +
                 ", typeOfBook='" + typeOfBook + '\'' +
-                ", available='" + s + '\'' +
+                ", available='" + returnYesorNo() + '\'' +
                 '}' +
                 "\n";
     }
-
-
 
 
     public int getId() {
@@ -108,7 +93,31 @@ public class Book implements Serializable {
         this.writerSurname = writerSurname;
     }
 
+    public void saveToFile()throws IOException {
+        FileWriter file = null;
+        try {
+            file = new FileWriter("baza.txt");
+            file.write(writerNames+", "+writerSurname+"; "+title+"; "+yearOfPublication+"; "+typeOfBook);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            file.close();
+        }
+    }
+
+
+
     public String getWriterSurname() {
         return writerSurname;
+
+
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

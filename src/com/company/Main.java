@@ -56,6 +56,10 @@ public class Main {
                     case 6:
                         returnBook();
                         break;
+                    case 9:
+                        lib.books[0].saveToFile();
+                        break;
+
                 }
 
 
@@ -71,9 +75,9 @@ public class Main {
             String typeOfBook;
             int yearOfPublication;
 
+            scan.nextLine();
             System.out.println("Give me a title");
             title = scan.nextLine();
-            scan.nextLine();
 
             System.out.println("Give me a writer names");
             writerNames = scan.nextLine();
@@ -89,10 +93,11 @@ public class Main {
                 System.out.println("Give me year of publication");
                 try {
                 yearOfPublication = scan.nextInt();
+                scan.nextLine();
                 break;}
                 catch (InputMismatchException e) {
                 System.out.println("Please write number");
-                scan.next();
+                //scan.next();
                 continue;}
             }
             Book b = new Book(writerNames, writerSurname, title, yearOfPublication, typeOfBook);
