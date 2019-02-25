@@ -120,4 +120,12 @@ public class Book implements Serializable {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public void setWriterNames(String writerNames) {
+        this.writerNames = writerNames;
+    }
+
+    public String getWriterNames() {
+        return writerNames;
+    }
 }

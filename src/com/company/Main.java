@@ -56,6 +56,10 @@ public class Main {
                     case 6:
                         returnBook();
                         break;
+                    case 7:
+                        searching();
+                        break;
+
                     case 9:
                         lib.books[0].saveToFile();
                         break;
@@ -151,6 +155,11 @@ public class Main {
                         lib.books[id - 1].setWriterSurname(scan.next());
                         break;
                     case 2:
+                        System.out.println("Give an ID");
+                        id = scan.nextInt();
+                        System.out.println("Current names " + lib.books[id-1].getWriterNames());
+                        System.out.println("Write corrected name");
+                        lib.books[id - 1].setWriterNames(scan.next());
                         break;
                     case 3:
                         break;
@@ -164,6 +173,56 @@ public class Main {
                 }
                 }
             }
+
+        private static void searching(){
+
+            boolean run=true;
+
+            while(run){
+                System.out.println("1. Search for author");
+                System.out.println("2. Search for title");
+                System.out.println("3. Search for type");
+                System.out.println("4. Return");
+
+                int number = scan.nextInt();
+
+                switch(number){
+
+                    case 1:
+                        scan.nextLine();
+                        System.out.println("Give a surname");
+                        String name=scan.next();
+
+                        for(int i=0 ; i<lib.books.length ; i++)
+                        if (lib.books[i].getWriterSurname().contains(name)){
+                            System.out.println(lib.books[i].toString());
+                        } else System.out.println("Book don't exit");
+
+                        break;
+
+                    case 2:
+                        System.out.println("cos");
+                        break;
+
+                    case 3:
+                        scan.nextLine();
+                        System.out.println("Give a title");
+                        String type=scan.next();
+
+                        for(int i=0 ; i<lib.books.length ; i++)
+                            if (type.equals(lib.books[i].getWriterSurname())){
+                                System.out.println(lib.books[i].toString());
+                            } else System.out.println("Book don't exit");
+                        break;
+
+                    case 4:
+                        run=false;
+                        break;
+                }
+
+
+            }
+        }
 
 
         }
